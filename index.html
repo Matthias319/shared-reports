@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Fargesia-Bambus für Kübelhaltung auf der Terrasse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Warm Dark Editorial — Shared Report CSS */
+/* Mobile-first, touch-optimiert (iPhone 15 / iPad Pro 12.9") */
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-8px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes barGrow { from { width: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+:root {
+    --bg: #111110;
+    --bg-raised: #1a1918;
+    --bg-card: #1f1e1c;
+    --bg-hover: rgba(255,255,255,0.04);
+    --text: #e8e4de;
+    --text-secondary: #b5afa5;
+    --text-muted: #706b62;
+    --accent: #cf865a;
+    --accent-hover: #e09468;
+    --accent-dim: rgba(207,134,90,0.15);
+    --accent-glow: rgba(207,134,90,0.08);
+    --green: #6db87a;
+    --yellow: #c9a84a;
+    --red: #d4675a;
+    --green-bg: rgba(109,184,122,0.1);
+    --yellow-bg: rgba(201,168,74,0.1);
+    --red-bg: rgba(212,103,90,0.1);
+    --border: #2a2826;
+    --border-light: #222120;
+    --radius: 6px;
+    --max-w: 740px;
+    --font-display: "Newsreader", Georgia, serif;
+    --font-body: "Outfit", system-ui, sans-serif;
+    /* Touch targets: min 44px (Apple HIG) */
+    --touch-min: 44px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font: 400 0.85rem/1.6 var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    padding: 1.5rem;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Safe area für Notch-Geräte */
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: -20%; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+}
+
+::selection { background: var(--accent-dim); color: var(--text); }
+
+/* ── Typografie ─────────────────────────────────────────────── */
+
+h1 {
+    font: 400 2rem/1.2 var(--font-display);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.3rem;
+    position: relative;
+}
+h2 {
+    font: 400 1.25rem/1.3 var(--font-display);
+    color: var(--accent);
+    margin: 2rem 0 0.8rem;
+}
+h3 {
+    font: 500 0.95rem/1.4 var(--font-display);
+    margin-bottom: 0.4rem;
+}
+
+.subtitle {
+    font: 400 0.8rem/1.4 var(--font-body);
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+a { color: var(--text); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent); }
+
+/* Touch-friendly Links: größerer Tap-Target */
+.source-link {
+    display: inline-block;
+    padding: 0.3rem 0;
+    min-height: var(--touch-min);
+    line-height: 1.4;
+    color: var(--accent);
+}
+
+code {
+    font-family: "SF Mono", "Menlo", monospace;
+    font-size: 0.78rem;
+    background: var(--bg-raised);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+}
+
+/* ── Highlights ─────────────────────────────────────────────── */
+
+.highlights {
+    list-style: none;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border-light);
+    animation: slideIn 0.4s ease-out both;
+    /* Touch-friendly */
+    min-height: var(--touch-min);
+}
+.highlights li:last-child { border-bottom: none; }
+.highlights li:nth-child(1) { animation-delay: 0.1s; }
+.highlights li:nth-child(2) { animation-delay: 0.2s; }
+.highlights li:nth-child(3) { animation-delay: 0.3s; }
+
+.hl-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-radius: 50%;
+    font: 500 0.75rem/1 var(--font-body);
+}
+.hl-text {
+    font: 400 0.95rem/1.5 var(--font-display);
+}
+
+/* ── Stat Cards ─────────────────────────────────────────────── */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    transition: box-shadow 0.2s;
+    position: relative;
+    animation: fadeUp 0.4s ease-out both;
+}
+.stat-card:hover { box-shadow: 0 0 20px var(--accent-glow); }
+.stat-card.primary { border-color: var(--accent); }
+.stat-card.primary::before {
+    content: "";
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    border-radius: 10px 0 0 10px;
+}
+.stat-value { font: 400 1.6rem/1.2 var(--font-display); }
+.stat-label {
+    font: 600 0.6rem/1 var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+.stat-note { font-size: 0.72rem; color: var(--text-secondary); margin-top: 0.2rem; }
+
+/* ── Content Sections ───────────────────────────────────────── */
+
+.content-section {
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.4s ease-out both;
+}
+.section-body { color: var(--text-secondary); line-height: 1.7; }
+.section-list {
+    list-style: none;
+    margin-top: 0.6rem;
+}
+.section-list li {
+    padding: 0.4rem 0 0.4rem 1rem;
+    position: relative;
+    color: var(--text-secondary);
+    min-height: calc(var(--touch-min) * 0.8);
+}
+.section-list li::before {
+    content: "";
+    position: absolute; left: 0; top: 0.85rem;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+/* ── Part Groups (hierarchische Sections) ──────────────────── */
+
+.part-group {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+.part-group:first-of-type { margin-top: 1.5rem; }
+.part-header {
+    font: 400 1.5rem/1.2 var(--font-display);
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--accent);
+}
+.part-intro {
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+.part-group .content-section {
+    margin-left: 0.4rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--border-light);
+}
+.part-group h3 {
+    color: var(--accent);
+    font: 400 1.1rem/1.3 var(--font-display);
+    margin: 1.5rem 0 0.6rem;
+}
+
+/* ── Data Table ─────────────────────────────────────────────── */
+
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1rem 0;
+    border-radius: var(--radius);
+}
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+.data-table th {
+    font: 600 0.6rem/1 var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0;
+    background: var(--bg);
+}
+.data-table td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border-light);
+    min-height: var(--touch-min);
+}
+.data-table tr:hover td { background: var(--bg-hover); }
+.data-table a { color: var(--accent); }
+
+/* ── Bar Charts ─────────────────────────────────────────────── */
+
+.bar-chart { margin: 1.5rem 0; }
+.bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+.bar-label {
+    flex: 0 0 120px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    border-radius: 4px;
+    animation: barGrow 0.8s ease-out both;
+}
+.bar-value {
+    flex: 0 0 50px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ── Badges ─────────────────────────────────────────────────── */
+
+.badge {
+    display: inline-block;
+    font: 600 0.6rem/1 var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: var(--radius);
+}
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+.badge-red { background: var(--red-bg); color: var(--red); }
+.badge-accent { background: var(--accent-dim); color: var(--accent); }
+.badge-muted { background: var(--bg-raised); color: var(--text-muted); }
+
+/* ── Agent Block ────────────────────────────────────────────── */
+
+.agent-block {
+    background: var(--accent-dim);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0;
+    line-height: 1.7;
+}
+.agent-label {
+    font: 600 0.6rem/1 var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+/* ── Collapsible ────────────────────────────────────────────── */
+
+details.collapse {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 0.8rem 0;
+    animation: fadeUp 0.3s ease-out both;
+}
+details.collapse summary {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    font: 500 0.85rem/1.4 var(--font-body);
+    color: var(--text-secondary);
+    list-style: none;
+    display: flex; align-items: center; gap: 0.5rem;
+    min-height: var(--touch-min);
+    -webkit-tap-highlight-color: transparent;
+}
+details.collapse summary::before {
+    content: "+"; color: var(--accent); font-weight: 600;
+    width: 20px; text-align: center;
+}
+details.collapse[open] summary::before { content: "\2212"; }
+details.collapse[open] summary {
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+}
+details.collapse summary::-webkit-details-marker { display: none; }
+.collapse-body { padding: 1rem; }
+
+/* ── Copyable Block ─────────────────────────────────────────── */
+
+.copyable {
+    position: relative;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 0.8rem 0;
+}
+.copyable-text {
+    padding: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font: 400 0.78rem/1.5 "SF Mono", "Menlo", monospace;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.copy-btn {
+    position: absolute; top: 0.5rem; right: 0.5rem;
+    background: var(--bg-card);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.3rem 0.6rem;
+    font: 500 0.65rem/1 var(--font-body);
+    cursor: pointer;
+    min-width: var(--touch-min);
+    min-height: 32px;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s, color 0.15s;
+}
+.copy-btn:hover { background: var(--accent-dim); }
+.copy-btn:active { background: var(--accent); color: var(--bg); }
+
+/* ── Guide Steps ────────────────────────────────────────────── */
+
+.guide-step {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.4s ease-out both;
+}
+.step-num {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 50%;
+    font: 600 0.8rem/1 var(--font-body);
+}
+.step-body { color: var(--text-secondary); margin-top: 0.3rem; }
+
+.callout {
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius);
+    margin: 0.6rem 0;
+    font-size: 0.82rem;
+}
+.callout-warn { background: var(--yellow-bg); border-left: 3px solid var(--yellow); }
+.callout-tip { background: var(--green-bg); border-left: 3px solid var(--green); }
+
+.prereqs {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.prereqs ul { list-style: disc; padding-left: 1.2rem; color: var(--text-secondary); }
+.prereqs h2 { margin: 0 0 0.5rem; font-size: 0.9rem; }
+
+/* ── Comparison ─────────────────────────────────────────────── */
+
+.compare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.compare-col {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    animation: fadeUp 0.4s ease-out both;
+}
+.compare-col h3 {
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+}
+.pros-list, .cons-list {
+    list-style: none;
+    margin-bottom: 0.8rem;
+}
+.pros-list li, .cons-list li {
+    padding: 0.35rem 0 0.35rem 1.2rem;
+    position: relative;
+    min-height: calc(var(--touch-min) * 0.7);
+}
+.pros-list li::before {
+    content: "+"; position: absolute; left: 0;
+    color: var(--green); font-weight: 600;
+}
+.cons-list li::before {
+    content: "\2212"; position: absolute; left: 0;
+    color: var(--red); font-weight: 600;
+}
+.specs-table { margin-top: 0.5rem; font-size: 0.78rem; }
+
+/* ── Sources Section ────────────────────────────────────────── */
+
+.sources-section { margin-top: 2rem; }
+.sources-section h2 { margin-bottom: 0.5rem; }
+
+/* ── Metrics Footer ─────────────────────────────────────────── */
+
+.metrics-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+.metric {
+    font: 400 0.75rem/1 var(--font-body);
+    color: var(--text-muted);
+}
+.metric-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 0.3rem;
+    color: var(--text-secondary);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    body { padding: 1rem; }
+    h1 { font-size: 1.6rem; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare-grid { grid-template-columns: 1fr; }
+    .bar-label { flex: 0 0 80px; font-size: 0.72rem; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 1.4rem; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .bar-label { flex: 0 0 60px; }
+    .highlights li { padding: 0.6rem 0.8rem; }
+}
+
+/* iPad Pro 12.9" Landscape */
+@media (min-width: 1024px) {
+    body { max-width: min(var(--max-w), 90vw); }
+}
+
+</style>
+</head>
+<body>
+<h1>Fargesia-Bambus für Kübelhaltung auf der Terrasse</h1>
+<div class="subtitle">Sorten, Bezugsquellen &amp; Pflege — Raum Hessen / Rhein-Main | März 2026</div>
+<ul class="highlights"><li><span class="hl-num">1</span><span class="hl-text">Fargesia rufa ist der Top-Pick: blickdicht, windfest, winterhart bis -26 °C, bewährt im Kübel</span></li><li><span class="hl-num">2</span><span class="hl-text">Fargesia murielae &#x27;Standing Stone&#x27; als Upgrade für mehr Höhe + Windfestigkeit (-28 °C)</span></li><li><span class="hl-num">3</span><span class="hl-text">Bambus-Baumschule Willumeit in Darmstadt-Eberstadt: 200+ Sorten, persönliche Beratung</span></li><li><span class="hl-num">4</span><span class="hl-text">Kleinanzeigen Hessen: 5× Fargesia &#x27;Deep Forest&#x27; für nur 10 € in Solms — sofort verfügbar</span></li><li><span class="hl-num">5</span><span class="hl-text">Kübel mindestens 60 L, besser 80–100 L — alle 2–3 Jahre umtopfen und teilen</span></li></ul>
+<div class="stat-grid"><div class="stat-card primary"><div class="stat-value">6</div><div class="stat-label">Top-Sorten</div><div class="stat-note">alle horstbildend</div></div><div class="stat-card"><div class="stat-value">-26 bis -28 °C</div><div class="stat-label">Winterhärte</div><div class="stat-note">Rhein-Main ist mild dagegen</div></div><div class="stat-card"><div class="stat-value">8 Angebote</div><div class="stat-label">Kleinanzeigen</div><div class="stat-note">Raum Hessen</div></div><div class="stat-card"><div class="stat-value">10 €</div><div class="stat-label">Bester Deal</div><div class="stat-note">5× Deep Forest, Solms</div></div><div class="stat-card"><div class="stat-value">2 Spezialisten</div><div class="stat-label">Bambus-Gärtnereien</div><div class="stat-note">Darmstadt + Dreieich</div></div></div>
+
+<div class="part-group"><h2 class="part-header">Sorten-Empfehlungen</h2><div class="section-body part-intro">Alle empfohlenen Sorten sind <strong>horstbildend</strong> (keine Ausläufer, keine Rhizomsperre nötig) und eignen sich für dauerhafte Kübelhaltung auf der Terrasse.</div><section class="content-section"><h3>Fargesia rufa — Allrounder Nr. 1 <span class="badge badge-accent">Top-Pick</span></h3><div class="section-body">Der Klassiker für den Kübel. Überhängender, bogiger Wuchs mit extrem dichtem Blattwerk. Rotbraune Halme, die mit dem Alter hellgelb werden. Sattgrüne bis gelbe Blätter.<br><br><strong>Höhe im Kübel:</strong> 1,5–2,5 m | <strong>Winterhärte:</strong> bis -26 °C | <strong>Standort:</strong> halbschattig bis sonnig</div><ul class="section-list"><li>Blickdicht: Sehr dicht — überlappendes Blattwerk sorgt für Sichtschutz ab dem 2. Jahr</li><li>Windfest: Gut — Halme biegen sich bei Wind, brechen aber nicht</li><li>Kübel-Toleranz: Ausgezeichnet — kommt mit beengtem Wurzelwerk am besten zurecht</li><li>Preis: Günstigste Sorte, häufig bei Kleinanzeigen zu finden (ab 30 €/Pflanze)</li><li>Kübel ab 60 L ausreichend, ideal 80 L</li></ul></section><section class="content-section"><h3>Fargesia murielae &#x27;Standing Stone&#x27; — Windfest &amp; blühsicher <span class="badge badge-accent">Upgrade</span></h3><div class="section-body">Straff aufrechter Wuchs, in der Spitze leicht überhängend. Geschützte Züchtersorte (JAN 108), blühsicher für 60–80 Jahre. Dünne, kräftige grüne Halme, im Alter gelb. Blätter 8–12 cm, etwas größer als andere Murielae-Sorten.<br><br><strong>Höhe im Kübel:</strong> 2–3 m | <strong>Winterhärte:</strong> bis -28 °C | <strong>Standort:</strong> halbschattig bis sonnig</div><ul class="section-list"><li>Blickdicht: Sehr dicht, breit wachsend</li><li>Windfest: Sehr gut — straff aufrecht, knickt nicht</li><li>Kübel: Gut geeignet ab 100 L Kübelgröße</li><li>Blühsicherheit: Voraussichtlich erst in 60–80 Jahren — großer Vorteil!</li><li>Preis: Ab 59,90 € im 20L-Container bei Bambus Dreieich</li></ul></section><section class="content-section"><h3>Fargesia robusta &#x27;Campbell&#x27; — Zebrabambus <span class="badge badge-accent">Bedingt</span></h3><div class="section-body">Besonders aufrechter, schlanker Wuchs mit markantem Zebra-Muster (Kontrast Halme/Halmscheiden). Wird sehr hoch. Eigentlich keine Dauer-Kübelpflanze — will langfristig ins Freiland.<br><br><strong>Höhe im Kübel:</strong> 2–3,5 m | <strong>Winterhärte:</strong> bis -22 °C | <strong>Standort:</strong> sonnig bis halbschattig</div><ul class="section-list"><li>Blickdicht: Dicht, aber eher aufrecht als breit — weniger überlappend als Rufa</li><li>Windfest: Mäßig — junge Triebe sind Spätfrost-empfindlich</li><li>Kübel: Nur bedingt — braucht min. 150 L Kübel, sollte möglichst bald ins Freiland</li><li>Vorteil: Höchster Sichtschutz (bis 3,5 m), verträgt volle Sonne am besten</li><li>Nachteil: -22 °C reicht für Hessen, aber weniger Puffer als Rufa (-26 °C)</li></ul></section><section class="content-section"><h3>Weitere empfehlenswerte Sorten</h3><div class="section-body"></div><ul class="section-list"><li><strong>Fargesia nitida &#x27;Black Pearl&#x27;</strong>: Elegante dunkle Halme, 1,5–2,5 m, -25 °C, halbschattig bevorzugt. Gut im Kübel. Ab 34 € bei Kleinanzeigen.</li><li><strong>Fargesia murielae &#x27;Deep Forest&#x27;</strong>: Kompakt 1,5–2 m, -25 °C, gut für kleinere Kübel. Aktuell 5 Stück für 10 € in Solms!</li><li><strong>Fargesia jiuzhaigou 1</strong>: Rötliche Halme, 2–3 m, -26 °C. Vorsicht: Rollt Blätter bei Wind und Kälte (optisch unschön, schadet aber nicht). Eher für geschützte Standorte.</li><li><strong>Fargesia denudata</strong>: Zierlicher, lockerer Wuchs, -25 °C. 4 Sträucher für 90 € VB in Baunatal.</li></ul></section></div><div class="part-group"><h2 class="part-header">Bezugsquellen Raum Hessen</h2><div class="section-body part-intro">Vom kostenlosen Selbstausgraben bis zur Fachberatung in der Spezialgärtnerei.</div><section class="content-section"><h3>Bambus-Spezialgärtnereien (Beratung + riesige Auswahl) <span class="badge badge-accent">Empfohlen</span></h3><div class="section-body"><strong>1. Bambus-Baumschule Ulrich Willumeit, Darmstadt-Eberstadt</strong><br>Über 200 Bambus-Sorten, 40+ Jahre Erfahrung. Persönliche Beratung, auch Vor-Ort-Beratung im eigenen Garten möglich. Größtes Bambus-Sortiment im Rhein-Main-Neckar-Gebiet.<br>- Tel: 06151-2780601 / 0177-5500116<br>- Web: bambus-baumschule-darmstadt.de<br><br><strong>2. Bambus Dreieich — Marcus Grunwald (bei Offenbach)</strong><br>Aktuelles Angebot: Fargesia murielae &#x27;Standing Stone&#x27; im 20L-Container für 59,90 € (125–150 cm, ~30 Halme). Geschützte Züchtersorte, blühsicher.<br>- Web: bambus-dreieich.de</div></section><section class="content-section"><h3>Kleinanzeigen Hessen — aktuelle Angebote <span class="badge badge-accent">Günstig</span></h3><div class="section-body">Stand Februar/März 2026. Preise sind VB — Verhandeln lohnt sich, besonders bei Selbstabholung.</div></section><section class="content-section"><h3>Aktuelle Inserate</h3><div class="section-body"></div><ul class="section-list"><li><strong>10 €</strong> — 5× Fargesia murielae &#x27;Deep Forest&#x27; in <strong>Solms</strong> (35606) → <a href="https://www.kleinanzeigen.de/s-anzeige/biete-5-bambuspflanzen-der-sorte-fargesia-murielae-deep-forest/3336872813-89-4844" target="_blank" rel="noopener">Link</a></li><li><strong>30 €</strong> — Fargesia Rufa/Vulcano/Murielae in <strong>Dreieich</strong> (63303) → <a href="https://www.kleinanzeigen.de/s-anzeige/bambus-fargesia-rufa-vulcano-oder-muriale-ohne-auslaeufer/2208032064-89-4291" target="_blank" rel="noopener">Link</a></li><li><strong>30 €/Stk.</strong> — Fargesia im Topf 100–120 cm in <strong>Gernsheim</strong> (64579) → <a href="https://www.kleinanzeigen.de/s-anzeige/bambus-fargesia-im-topf-100-120cm/3098906466-89-4452" target="_blank" rel="noopener">Link</a></li><li><strong>34 €</strong> — Fargesia &#x27;Black Pearl&#x27; 80–100 cm in <strong>Rodenbach</strong> (63517) → <a href="https://www.kleinanzeigen.de/s-anzeige/bambus-fargesia-blackpearl-heckenpflanze-80-100cm-winterhart/3029845875-89-4281" target="_blank" rel="noopener">Link</a></li><li><strong>40 € VB</strong> — 2× Gartenbambus Fargesia 1–1,5 m in <strong>Rüsselsheim</strong> (65428) → <a href="https://www.kleinanzeigen.de/s-anzeige/2x-garten-bambus-fargesia/3152327919-89-4816" target="_blank" rel="noopener">Link</a></li><li><strong>49 €</strong> — Fargesia Rufa winterhart in <strong>Rodenbach</strong> (63517) → <a href="https://www.kleinanzeigen.de/s-anzeige/winterharter-bambus-rufa-fargesia-heckenpflanze-/3029834768-89-4281" target="_blank" rel="noopener">Link</a></li><li><strong>80 € VB</strong> — 2× Fargesia Rufa 1,70–2 m (Selbstausgrabung) in <strong>Limburg</strong> (65549) → <a href="https://www.kleinanzeigen.de/s-anzeige/2-x-bambus-fargesia-rufa-toller-sichtschutz/3176597135-89-4816" target="_blank" rel="noopener">Link</a></li><li><strong>90 € VB</strong> — 4× Fargesia denudata in <strong>Baunatal</strong> (34225) → <a href="https://www.kleinanzeigen.de/s-anzeige/4x-fargesia-denudata-bambus-straeucher-ohne-wurzelauslaeufer/3337215553-89-4417" target="_blank" rel="noopener">Link</a></li></ul></section><section class="content-section"><h3>Laufende Suche einrichten</h3><div class="section-body"><div class="callout callout-tip">Suchagent auf Kleinanzeigen aktivieren, um neue Angebote sofort zu sehen:</div></div><ul class="section-list"><li><strong>Fargesia Hessen</strong>: kleinanzeigen.de/s-hessen/bambus-fargesia/k0l4279</li><li><strong>Verschenk-Kategorie</strong>: kleinanzeigen.de/s-zu-verschenken/bambus/k0c192</li><li><strong>EBS-Forum Tauschbörse</strong>: forum.bambus-deutschland.de → Pflanzen-Tauschbörse</li></ul></section><section class="content-section"><h3>Preisrahmen-Orientierung</h3><div class="section-body"></div><ul class="section-list"><li><strong>Kleinanzeigen (Selbstausgrabung):</strong> 1–2 m Pflanze → 0–30 €</li><li><strong>Kleinanzeigen (Topf-Pflanze):</strong> 80–150 cm → 10–50 €</li><li><strong>Bambus-Spezialgärtnerei (Container):</strong> 100–150 cm → 40–70 €</li><li><strong>Online-Baumschule (Versand):</strong> 80–120 cm → 25–60 € + Versand</li><li><strong>Baumarkt/Gartencenter (Kölle, Hornbach, OBI):</strong> 60–100 cm → 20–45 €, weniger Auswahl</li></ul></section></div><div class="part-group"><h2 class="part-header">Kübelpflege-Essentials</h2><div class="section-body part-intro">Was man wissen muss, damit der Bambus im Kübel langfristig gedeiht.</div><section class="content-section"><h3>Kübel &amp; Substrat</h3><div class="section-body"></div><ul class="section-list"><li><strong>Kübelgröße:</strong> Minimum 60 L, besser 80–100 L. Für &#x27;Standing Stone&#x27; und Campbell: 100–150 L</li><li><strong>Kübelform:</strong> Rund, nach oben hin breiter werdend! Eckige/konische Kübel machen Umtopfen unmöglich, ohne den Kübel zu zerstören</li><li><strong>Drainage:</strong> 15 cm Blähton/Seramis/Kies am Boden, Vlies darüber (trennt Drainage vom Substrat)</li><li><strong>Substrat:</strong> Bambuserde (z.B. Toolisan) oder Gartenerde + ⅓ Kompost + ⅓ Torf + Blähton für Durchlässigkeit</li><li><strong>Wasserabzugslöcher:</strong> Unbedingt bohren! Bei Fargesia ist die Lochgröße egal (keine Ausläufer)</li></ul></section><section class="content-section"><h3>Wasser, Dünger &amp; Winterschutz</h3><div class="section-body"></div><ul class="section-list"><li><strong>Gießen:</strong> Im Sommer fast täglich, bis Wasser unten rausläuft. Im Winter bei frostfreien Tagen gießen (Bambus verdunstet auch im Winter!)</li><li><strong>Düngen:</strong> März bis Mitte Juni, 3× im Abstand von 4 Wochen. Langzeitdünger für Bambus/Gräser verwenden</li><li><strong>Umtopfen:</strong> Alle 2–3 Jahre im Frühjahr. Dabei teilen (Pflanze rausheben, mit Säge 1–2× durchschneiden, neu eintopfen)</li><li><strong>Winterschutz im Kübel (WICHTIG!):</strong> Kübel mit Vlies/Noppenfolie/Jute umwickeln — im Kübel friert der Wurzelballen viel schneller durch als im Boden! Auch -26 °C Winterhärte heißt im Kübel effektiv nur -15 °C</li><li><strong>Gelbe Blätter = Alarm:</strong> Sofort Wasser- und Nährstoffversorgung prüfen!</li></ul></section><section class="content-section"><h3>Wichtige Hinweise</h3><div class="section-body"></div><ul class="section-list"><li><strong>Bambus im Kübel bleibt kleiner</strong> als ausgepflanzt — das ist normal und sogar vorteilhaft</li><li><strong>Wollläuse</strong> können bei Fargesia murielae-Sorten auftreten — regelmäßig kontrollieren</li><li><strong>Jiuzhaigou-Sorten</strong> rollen bei Wind und Kälte die Blätter — sieht besorgniserregend aus, ist aber ein Schutzmechanismus</li><li><strong>Campbell ist keine Dauer-Kübelpflanze</strong> — will mittelfristig ins Freiland</li><li><strong>Fargesia braucht Halbschatten</strong> — bei praller Südsonne den Wurzelbereich mulchen und häufiger gießen</li></ul></section></div>
+
+
+<div class="sources-section"><h2>Quellen</h2><div class="table-wrap"><table class="data-table"><thead><tr><th>Quelle</th><th>Qualität</th><th>Tier</th></tr></thead><tbody><tr><td><a href="https://bambus.de/bambus-im-kuebel" target="_blank" rel="noopener" class="source-link">bambus.de — Bambus im Kübel</a></td><td><span class="badge badge-green">Q8</span></td><td></td></tr><tr><td><a href="https://bambus.de/fargesia-robusta-campbell-aufrechter-bambus-fuer-sonnige-standorte" target="_blank" rel="noopener" class="source-link">bambus.de — Fargesia robusta Campbell</a></td><td><span class="badge badge-green">Q8</span></td><td></td></tr><tr><td><a href="https://www.bambus-lexikon.de/kuebelpflanzen-pflege.html" target="_blank" rel="noopener" class="source-link">Bambus-Lexikon — Kübelpflanzen Pflege</a></td><td><span class="badge badge-green">Q8</span></td><td></td></tr><tr><td><a href="https://www.bambuswald.de/bambuspflanzen-als-sichtschutz-fuer-terrasse-und-balkon" target="_blank" rel="noopener" class="source-link">Bambuswald.de — Sichtschutz Terrasse/Balkon</a></td><td><span class="badge badge-green">Q7</span></td><td></td></tr><tr><td><a href="https://www.familiengarten-tipps.de/pflanzen/bambus/bambus-im-topf/die-drei-besten-sorten-bambus-fuer-den-balkon/" target="_blank" rel="noopener" class="source-link">Familiengarten — Die 3 besten Sorten für Balkon</a></td><td><span class="badge badge-green">Q9</span></td><td></td></tr><tr><td><a href="https://forum.bambus-deutschland.de/index.php?thread/25196-bambusempfehlung-sonnig-windig-sichtschutz/" target="_blank" rel="noopener" class="source-link">EBS-Forum — Bambusempfehlung (Sonnig, Windig)</a></td><td><span class="badge badge-green">Q7</span></td><td></td></tr><tr><td><a href="https://www.mypalmshop.de/bambus-und-graeser/nicht-wuchernder-bambus/fargesia-robusta-campbell" target="_blank" rel="noopener" class="source-link">MyPalmShop — Fargesia Robusta Campbell</a></td><td><span class="badge badge-green">Q8</span></td><td></td></tr><tr><td><a href="https://bambus-baumschule-darmstadt.de/index.html" target="_blank" rel="noopener" class="source-link">Bambus-Baumschule Willumeit Darmstadt</a></td><td><span class="badge badge-green">Q7</span></td><td></td></tr><tr><td><a href="http://bambus-dreieich.de/" target="_blank" rel="noopener" class="source-link">Bambus Dreieich — Standing Stone</a></td><td><span class="badge badge-muted">Q5</span></td><td></td></tr><tr><td><a href="https://www.kleinanzeigen.de/s-hessen/bambus-fargesia/k0l4279" target="_blank" rel="noopener" class="source-link">Kleinanzeigen Hessen — Fargesia</a></td><td><span class="badge badge-green">Q8</span></td><td></td></tr></tbody></table></div></div>
+<div class="metrics-footer"><span class="metric"><span class="metric-label">Zeit</span> ~89s</span><span class="metric"><span class="metric-label">Quellen</span> 31 URLs (16 nutzbar)</span><span class="metric"><span class="metric-label">Tokens</span> ~24.000</span><span class="metric"><span class="metric-label">Qualität</span> Ø 7.1/10</span><span class="metric"><span class="metric-label">Sprachen</span> 2 (DE + EN)</span><span class="metric"><span class="metric-label">Domains</span> 14 unique</span></div>
+</body>
+</html>
