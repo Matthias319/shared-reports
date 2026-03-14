@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Küchenstudios — Ballerina Küchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg: #faf8f5;
+    --bg-card: #ffffff;
+    --bg-route: #fff8f3;
+    --text: #1a1a1a;
+    --text-secondary: #5a5650;
+    --text-muted: #9a9490;
+    --accent: #cf865a;
+    --accent-hover: #b8724a;
+    --accent-dim: rgba(207,134,90,0.12);
+    --green: #2d8a3e;
+    --green-bg: rgba(45,138,62,0.1);
+    --yellow: #b8860b;
+    --red: #c0392b;
+    --border: #e8e4de;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 20px rgba(0,0,0,0.1);
+    --radius: 14px;
+    --font: 'Outfit', -apple-system, sans-serif;
+}
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    padding: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+}
+
+/* ── Header ──────────────────────── */
+
+.header {
+    text-align: center;
+    padding: 1.5rem 0 1rem;
+}
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+}
+.header .sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+/* ── Route Banner ────────────────── */
+
+.route-banner {
+    background: linear-gradient(135deg, var(--accent), #e0965a);
+    color: white;
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    margin: 1rem 0 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(207,134,90,0.3);
+}
+.route-banner h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.02em;
+}
+.route-banner .route-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+}
+.route-step {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.route-step .num {
+    background: rgba(255,255,255,0.25);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.route-arrow {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    padding: 0 0.15rem;
+}
+.route-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    color: var(--accent);
+    font: 600 0.85rem/1 var(--font);
+    padding: 0.7rem 1.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+.route-btn:active { transform: scale(0.97); }
+.route-btn svg { width: 18px; height: 18px; }
+
+/* ── Studio Cards ────────────────── */
+
+.section-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin: 2rem 0 0.8rem;
+    padding-left: 0.2rem;
+}
+
+.studio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    margin-bottom: 0.8rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+    position: relative;
+}
+.studio-card:hover { box-shadow: var(--shadow-hover); }
+.studio-card.featured {
+    border-color: var(--accent);
+    border-width: 2px;
+    background: var(--bg-route);
+}
+
+.card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 0.6rem;
+}
+.card-num {
+    background: var(--accent);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.card-num.muted {
+    background: var(--text-muted);
+}
+.card-info { flex: 1; }
+.card-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+.card-location {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+}
+
+.card-badges {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
+}
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+}
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-accent { background: var(--accent-dim); color: var(--accent-hover); }
+.badge-muted { background: #f0ede8; color: var(--text-muted); }
+
+.card-verdict {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0.5rem 0 0.8rem;
+}
+.card-verdict strong { color: var(--text); font-weight: 500; }
+
+.stars {
+    display: inline-flex;
+    gap: 1px;
+    vertical-align: middle;
+}
+.star {
+    color: #f5b731;
+    font-size: 0.85rem;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+.maps-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent);
+    color: white;
+    font: 500 0.8rem/1 var(--font);
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+    flex: 1;
+    justify-content: center;
+    min-height: 44px;
+}
+.maps-btn:hover { background: var(--accent-hover); }
+.maps-btn:active { transform: scale(0.97); }
+.maps-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.call-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: var(--bg);
+    color: var(--text-secondary);
+    font: 500 0.8rem/1 var(--font);
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    min-height: 44px;
+    transition: background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+.call-btn:hover { background: #f0ede8; }
+.call-btn svg { width: 15px; height: 15px; }
+
+/* ── Preis-Leistung Box ──────────── */
+
+.pl-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow);
+}
+.pl-box h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+.pl-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.pl-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+}
+.pl-track {
+    flex: 1;
+    height: 10px;
+    background: #f0ede8;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+.pl-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.6s ease;
+}
+.pl-range {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    width: 90px;
+    flex-shrink: 0;
+}
+.pl-you {
+    position: absolute;
+    top: -3px;
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+    z-index: 2;
+}
+
+/* ── Collapsible ─────────────────── */
+
+details.more {
+    margin: 0.8rem 0;
+}
+details.more summary {
+    font: 500 0.82rem/1 var(--font);
+    color: var(--accent);
+    cursor: pointer;
+    padding: 0.8rem 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+}
+details.more summary::-webkit-details-marker { display: none; }
+details.more summary::before {
+    content: "+";
+    font-weight: 600;
+    font-size: 1rem;
+    width: 24px;
+    text-align: center;
+}
+details.more[open] summary::before { content: "\2212"; }
+
+/* ── Footer ──────────────────────── */
+
+.footer {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* ── Responsive ──────────────────── */
+
+@media (max-width: 400px) {
+    body { padding: 0.8rem; }
+    .header h1 { font-size: 1.3rem; }
+    .route-steps { gap: 0.2rem; }
+    .route-step { font-size: 0.7rem; }
+    .card-actions { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h1>Ballerina Küchen<br>in eurer Nähe</h1>
+    <div class="sub">3 Händler ab Seeheim-Jugenheim · Budget bis 30.000 EUR</div>
+</div>
+
+<!-- Route Banner -->
+<div class="route-banner">
+    <h2>Empfohlene Route</h2>
+    <div class="route-steps">
+        <span class="route-step"><span class="num">1</span> Keie</span>
+        <span class="route-arrow">›</span>
+        <span class="route-step"><span class="num">2</span> MEDA DA</span>
+        <span class="route-arrow">›</span>
+        <span class="route-step"><span class="num">3</span> PLANA WI</span>
+        <span class="route-arrow">›</span>
+        <span class="route-step"><span class="num">4</span> MEDA MA</span>
+    </div>
+    <a class="route-btn" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/K%C3%BCchen+Keie+Weiterstadt+Robert-Koch-Stra%C3%9Fe+3+64331+Weiterstadt/MEDA+K%C3%BCchen+Otto-R%C3%B6hm-Stra%C3%9Fe+51+64293+Darmstadt/PLANA+K%C3%BCchenstudio+Wiesbaden/MEDA+K%C3%BCchen+Frankenthaler+Stra%C3%9Fe+125+68307+Mannheim" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        Komplette Route in Maps öffnen
+    </a>
+</div>
+
+<!-- Ballerina-Händler -->
+<div class="section-label">Ballerina-Händler — diese besuchen</div>
+
+<!-- 1. Küchen Keie -->
+<div class="studio-card featured">
+    <div class="card-top">
+        <span class="card-num">1</span>
+        <div class="card-info">
+            <div class="card-name">Küchen Keie</div>
+            <div class="card-location">Weiterstadt · ~15 km · Robert-Koch-Str. 3</div>
+        </div>
+    </div>
+    <div class="card-badges">
+        <span class="badge badge-green">Ballerina ✓</span>
+        <span class="badge badge-accent"><span class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></span> 4,9 · 2.098</span>
+        <span class="badge badge-muted">6× Rhein-Main</span>
+    </div>
+    <div class="card-verdict">
+        <strong>Hier zuerst hin.</strong> Beste Bewertungen der Region. Persönliche Beratung, eigene Monteure, faire Preise. März-Aktion: 3× sparen ab 8.000 EUR Küchenwert.
+    </div>
+    <div class="card-actions">
+        <a class="maps-btn" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/K%C3%BCchen+Keie+Weiterstadt+Robert-Koch-Stra%C3%9Fe+3+64331+Weiterstadt" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Route planen
+        </a>
+        <a class="call-btn" href="tel:0615192830">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Anrufen
+        </a>
+    </div>
+</div>
+
+<!-- 2. MEDA Darmstadt -->
+<div class="studio-card featured">
+    <div class="card-top">
+        <span class="card-num">2</span>
+        <div class="card-info">
+            <div class="card-name">MEDA Küchen</div>
+            <div class="card-location">Darmstadt · ~18 km · Otto-Röhm-Str. 51</div>
+        </div>
+    </div>
+    <div class="card-badges">
+        <span class="badge badge-green">Ballerina ✓</span>
+        <span class="badge badge-accent">Musterküchen-Abverkauf</span>
+        <span class="badge badge-muted">4 Filialen</span>
+    </div>
+    <div class="card-verdict">
+        <strong>Größte Auswahl + Schnäppchen-Chance.</strong> Ausstellungsküchen von Ballerina oft 30–50% günstiger. Gut zum Preisvergleich. Beratung auf Deutsch und Türkisch.
+    </div>
+    <div class="card-actions">
+        <a class="maps-btn" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/MEDA+K%C3%BCchen+Otto-R%C3%B6hm-Stra%C3%9Fe+51+64293+Darmstadt" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Route planen
+        </a>
+        <a class="call-btn" href="tel:061513842280">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Anrufen
+        </a>
+    </div>
+</div>
+
+<!-- 3. PLANA Wiesbaden -->
+<div class="studio-card">
+    <div class="card-top">
+        <span class="card-num">3</span>
+        <div class="card-info">
+            <div class="card-name">PLANA Küchenstudio</div>
+            <div class="card-location">Wiesbaden · ~60 km</div>
+        </div>
+    </div>
+    <div class="card-badges">
+        <span class="badge badge-green">Ballerina ✓</span>
+        <span class="badge badge-accent">24 Mon. Preisgarantie</span>
+    </div>
+    <div class="card-verdict">
+        <strong>Weiter weg, aber Preisgarantie ist selten.</strong> Aktionspreise auf Keramik/Granit-Arbeitsplatten bis 31.03.2026. Lohnt sich wenn Wiesbaden eh auf dem Weg liegt.
+    </div>
+    <div class="card-actions">
+        <a class="maps-btn" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/PLANA+K%C3%BCchenstudio+Wiesbaden" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Route planen
+        </a>
+    </div>
+</div>
+
+<!-- 4. MEDA Mannheim -->
+<div class="studio-card">
+    <div class="card-top">
+        <span class="card-num muted">4</span>
+        <div class="card-info">
+            <div class="card-name">MEDA Küchen</div>
+            <div class="card-location">Mannheim · ~55 km · Frankenthaler Str. 125</div>
+        </div>
+    </div>
+    <div class="card-badges">
+        <span class="badge badge-green">Ballerina ✓</span>
+        <span class="badge badge-muted">Optional</span>
+    </div>
+    <div class="card-verdict">
+        Nur hinfahren, wenn ihr nach den ersten 3 Besuchen noch Vergleich braucht. Selbes Sortiment wie MEDA Darmstadt, aber größerer Showroom.
+    </div>
+    <div class="card-actions">
+        <a class="maps-btn" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/MEDA+K%C3%BCchen+Frankenthaler+Stra%C3%9Fe+125+68307+Mannheim" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Route planen
+        </a>
+    </div>
+</div>
+
+<!-- Preis-Leistung -->
+<div class="pl-box">
+    <h3>Wo liegt Ballerina preislich?</h3>
+    <div class="pl-bar">
+        <span class="pl-label">Nobilia</span>
+        <div class="pl-track">
+            <div class="pl-fill" style="width: 30%; background: #b5afa5;"></div>
+        </div>
+        <span class="pl-range">8–18k EUR</span>
+    </div>
+    <div class="pl-bar">
+        <span class="pl-label" style="font-weight:600; color: var(--accent);">Ballerina</span>
+        <div class="pl-track">
+            <div class="pl-fill" style="width: 50%; left: 20%; margin-left: 20%; background: linear-gradient(90deg, var(--accent), #e0965a);"></div>
+            <div class="pl-you" style="left: 60%;" title="Euer Budget"></div>
+        </div>
+        <span class="pl-range" style="font-weight:500; color: var(--text);">12–25k EUR</span>
+    </div>
+    <div class="pl-bar">
+        <span class="pl-label">Leicht</span>
+        <div class="pl-track">
+            <div class="pl-fill" style="width: 50%; margin-left: 42%; background: #c0392b;"></div>
+        </div>
+        <span class="pl-range">25–60k+ EUR</span>
+    </div>
+    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.8rem; text-align: center;">
+        <span style="display: inline-block; width: 4px; height: 14px; background: var(--accent); border-radius: 2px; vertical-align: middle; margin-right: 4px;"></span>
+        Euer Budget (30k) — reicht für Premium-Ballerina mit guten Geräten
+    </p>
+</div>
+
+<!-- Ersatzoptionen -->
+<div class="section-label">Plan B — falls die Top 4 nicht passen</div>
+
+<div class="studio-card">
+    <div class="card-top">
+        <span class="card-num" style="background: var(--yellow);">B1</span>
+        <div class="card-info">
+            <div class="card-name">Küchen Keie · Hofheim</div>
+            <div class="card-location">Hofheim am Taunus · ~50 km · Wickerer Weg 13–15</div>
+        </div>
+    </div>
+    <div class="card-badges">
+        <span class="badge badge-green">Ballerina ✓</span>
+        <span class="badge badge-muted">Selbe Kette wie #1</span>
+    </div>
+    <div class="card-verdict">
+        Gleiche Keie-Qualität, anderer Standort. Nützlich wenn der Berater in Weiterstadt nicht passt oder ihr eine zweite Meinung vom selben Haus wollt.
+    </div>
+    <div class="card-actions">
+        <a class="maps-btn" style="background: var(--yellow);" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/K%C3%BCchen+Keie+Hofheim+Wickerer+Weg+13+65719+Hofheim" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Route planen
+        </a>
+        <a class="call-btn" href="tel:0619299330">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Anrufen
+        </a>
+    </div>
+</div>
+
+<div class="studio-card">
+    <div class="card-top">
+        <span class="card-num" style="background: var(--yellow);">B2</span>
+        <div class="card-info">
+            <div class="card-name">MEDA Küchen · Rosbach</div>
+            <div class="card-location">Rosbach v.d. Höhe · ~55 km · Dieselstraße 3</div>
+        </div>
+    </div>
+    <div class="card-badges">
+        <span class="badge badge-green">Ballerina ✓</span>
+        <span class="badge badge-accent">VR-Küchenplanung</span>
+    </div>
+    <div class="card-verdict">
+        Einziger MEDA mit <strong>Virtual Reality Raum</strong> — ihr seht eure geplante Küche in 3D bevor ihr kauft. 1.500 m² Ausstellung.
+    </div>
+    <div class="card-actions">
+        <a class="maps-btn" style="background: var(--yellow);" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/MEDA+K%C3%BCchen+Dieselstra%C3%9Fe+3+61191+Rosbach" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Route planen
+        </a>
+    </div>
+</div>
+
+<div class="studio-card">
+    <div class="card-top">
+        <span class="card-num" style="background: var(--yellow);">B3</span>
+        <div class="card-info">
+            <div class="card-name">Küchen Keie · Wiesbaden</div>
+            <div class="card-location">Wiesbaden-Erbenheim · ~55 km · Bahnstr. 2</div>
+        </div>
+    </div>
+    <div class="card-badges">
+        <span class="badge badge-green">Ballerina ✓</span>
+        <span class="badge badge-muted">Nahe PLANA WI</span>
+    </div>
+    <div class="card-verdict">
+        Direkt neben PLANA Wiesbaden — lässt sich an einem Tag kombinieren. Zwei Ballerina-Angebote vergleichen, ein Ausflug.
+    </div>
+    <div class="card-actions">
+        <a class="maps-btn" style="background: var(--yellow);" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/K%C3%BCchen+Keie+Wiesbaden+Bahnstr.+2+65205+Wiesbaden" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Route planen
+        </a>
+        <a class="call-btn" href="tel:061173425480">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Anrufen
+        </a>
+    </div>
+</div>
+
+<!-- Ohne Ballerina -->
+<details class="more">
+    <summary>Weitere Studios ohne Ballerina</summary>
+    <div style="padding: 0.5rem 0;">
+
+        <div class="studio-card">
+            <div class="card-top">
+                <div class="card-info">
+                    <div class="card-name">Küchen Böhm</div>
+                    <div class="card-location">Groß-Bieberau · ~8 km · Am nächsten dran</div>
+                </div>
+            </div>
+            <div class="card-badges">
+                <span class="badge badge-muted">Kein Ballerina</span>
+                <span class="badge badge-muted">Inhabergeführt</span>
+            </div>
+            <div class="card-verdict">Gut für einen schnellen ersten Eindruck — direkt nebenan, kennt die Region.</div>
+            <div class="card-actions">
+                <a class="maps-btn" style="background: var(--text-muted);" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/K%C3%BCchen+B%C3%B6hm+GmbH+Gro%C3%9F-Bieberau" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Maps
+                </a>
+            </div>
+        </div>
+
+        <div class="studio-card">
+            <div class="card-top">
+                <div class="card-info">
+                    <div class="card-name">küchen WALTHER</div>
+                    <div class="card-location">Darmstadt · ~18 km · Marktführer Rhein-Main</div>
+                </div>
+            </div>
+            <div class="card-badges">
+                <span class="badge badge-muted">Kein Ballerina</span>
+                <span class="badge badge-accent">Gute P/L anderer Marken</span>
+            </div>
+            <div class="card-verdict">Starkes Sortiment anderer Marken. Bosch-Muldenlüfter gratis ab 9.900 EUR.</div>
+            <div class="card-actions">
+                <a class="maps-btn" style="background: var(--text-muted);" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/k%C3%BCchen+WALTHER+Darmstadt" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Maps
+                </a>
+            </div>
+        </div>
+
+        <div class="studio-card">
+            <div class="card-top">
+                <div class="card-info">
+                    <div class="card-name">Küchen Aktuell</div>
+                    <div class="card-location">Weiterstadt · ~15 km · 117 Ausstellungsküchen</div>
+                </div>
+            </div>
+            <div class="card-badges">
+                <span class="badge badge-muted">Kein Ballerina</span>
+                <span class="badge badge-muted">4.500 m²</span>
+            </div>
+            <div class="card-verdict">Riesige Ausstellung, Alles-Inklusive-Preise. Gut um ein Preisgefühl zu entwickeln.</div>
+            <div class="card-actions">
+                <a class="maps-btn" style="background: var(--text-muted);" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/K%C3%BCchen+Aktuell+Am+Dornbusch+1+64331+Weiterstadt" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Maps
+                </a>
+            </div>
+        </div>
+
+        <div class="studio-card">
+            <div class="card-top">
+                <div class="card-info">
+                    <div class="card-name">küche:herweck</div>
+                    <div class="card-location">Wiesbaden · ~65 km · Familienunternehmen</div>
+                </div>
+            </div>
+            <div class="card-badges">
+                <span class="badge badge-muted">Kein Ballerina</span>
+                <span class="badge badge-accent"><span class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></span> 4,9</span>
+            </div>
+            <div class="card-verdict">Beste Bewertungen überhaupt (4,9/5). Eigene Monteure. Nur kein Ballerina.</div>
+            <div class="card-actions">
+                <a class="maps-btn" style="background: var(--text-muted);" href="https://www.google.com/maps/dir/Seeheim-Jugenheim/k%C3%BCche+herweck+Wiesbaden" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Maps
+                </a>
+            </div>
+        </div>
+
+    </div>
+</details>
+
+<!-- Footer -->
+<div class="footer">
+    Recherche: 14. März 2026 · 58 Quellen ausgewertet<br>
+    Ballerina-Händler über Hersteller-Website + MEDA/Keie/PLANA-Webseiten bestätigt
+</div>
+
+</body>
+</html>
