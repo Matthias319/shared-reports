@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finale Analyse: Bachelorarbeit Lea Wiebe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8f6f2; --bg-raised: #efece6; --bg-card: #ffffff; --bg-hover: rgba(0,0,0,0.03);
+            --text: #1a1918; --text-secondary: #555049; --text-muted: #8a847a;
+            --accent: #b5724a; --accent-hover: #a0623d; --accent-dim: rgba(181,114,74,0.1); --accent-glow: rgba(181,114,74,0.05);
+            --green: #3d8a4a; --yellow: #9a7d2e; --red: #c0453a;
+            --green-bg: rgba(61,138,74,0.08); --yellow-bg: rgba(154,125,46,0.08); --red-bg: rgba(192,69,58,0.08);
+            --border: #ddd8d0; --border-light: #e8e4de;
+            --link: #1a1918; --link-hover: var(--accent);
+            --bg-glow: rgba(181,114,74,0.04);
+            --radius: 6px; --max-w: 780px; --card-radius: 10px; --card-pad: 1.2rem 1.3rem;
+            --font-display: "Newsreader", Georgia, serif; --font-body: "Outfit", system-ui, sans-serif;
+            --toggle-bg: var(--bg-raised); --toggle-knob: var(--accent);
+        }
+        [data-theme="dark"] {
+            --bg: #111110; --bg-raised: #1a1918; --bg-card: #1f1e1c; --bg-hover: rgba(255,255,255,0.04);
+            --text: #e8e4de; --text-secondary: #b5afa5; --text-muted: #706b62;
+            --accent: #cf865a; --accent-hover: #e09468; --accent-dim: rgba(207,134,90,0.15); --accent-glow: rgba(207,134,90,0.08);
+            --green: #6db87a; --yellow: #c9a84a; --red: #d4675a;
+            --green-bg: rgba(109,184,122,0.1); --yellow-bg: rgba(201,168,74,0.1); --red-bg: rgba(212,103,90,0.1);
+            --border: #2a2826; --border-light: #222120;
+            --link: #e8e4de; --bg-glow: rgba(207,134,90,0.06);
+            --toggle-bg: var(--bg-card); --toggle-knob: var(--accent);
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{background:var(--bg);color:var(--text);font:400 .85rem/1.6 var(--font-body);-webkit-font-smoothing:antialiased;min-height:100vh;transition:background .3s,color .3s}
+        body::before{content:"";position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,var(--accent-glow) 0%,transparent 70%);pointer-events:none;z-index:0;transition:background .3s}
+        main{max-width:var(--max-w);margin:0 auto;padding:2rem 1.5rem 3rem;position:relative;z-index:1}
+        .theme-toggle{position:fixed;top:1rem;right:1rem;z-index:100;display:flex;align-items:center;gap:.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:4px 12px 4px 8px;cursor:pointer;user-select:none;transition:background .3s,border-color .3s}
+        .theme-toggle:hover{border-color:var(--accent)}
+        .toggle-track{width:36px;height:20px;background:var(--toggle-bg);border:1px solid var(--border);border-radius:999px;position:relative;transition:background .3s}
+        .toggle-knob{width:14px;height:14px;background:var(--toggle-knob);border-radius:50%;position:absolute;top:2px;left:2px;transition:transform .3s}
+        [data-theme="dark"] .toggle-knob{transform:translateX(16px)}
+        .toggle-label{font:500 .65rem/1 var(--font-body);text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)}
+        .toggle-icon{font-size:.85rem;line-height:1}
+        h1{font:400 clamp(1.8rem,4vw,2.6rem)/1.1 var(--font-display);letter-spacing:-.03em;color:var(--text)}
+        h2{font:400 1.25rem/1.3 var(--font-display);color:var(--text);margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border-light)}
+        h3{font:500 .95rem/1.3 var(--font-display);color:var(--text);margin:1.5rem 0 .75rem}
+        h4{font:600 .75rem/1.3 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin:1rem 0 .5rem}
+        p{font:400 .85rem/1.6 var(--font-body);color:var(--text-secondary);margin:.5rem 0}
+        a{color:var(--link);text-decoration:none;transition:color .15s}a:hover{color:var(--link-hover)}
+        ::selection{background:var(--accent-dim);color:var(--text)}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+        .fade-up{animation:fadeUp .4s ease both;animation-delay:calc(var(--i,0)*.06s)}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+        @media(max-width:768px){main{padding:1.5rem 1rem 2rem}:root{--max-w:100%}.metric-grid{grid-template-columns:1fr 1fr!important}}
+        @media(max-width:480px){h1{font-size:1.5rem}:root{--max-w:100%}.metric-grid{grid-template-columns:1fr!important}}
+
+        /* Hero */
+        .hero{margin-bottom:2rem}
+        .hero .eyebrow{font:600 .7rem/1 var(--font-body);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.75rem}
+        .hero h1{margin-bottom:.75rem}
+        .hero .subtitle{font:300 1rem/1.4 var(--font-display);color:var(--text-secondary);font-style:italic}
+        .hero .meta{margin-top:1rem;font:.75rem/1.4 var(--font-body);color:var(--text-muted)}
+
+        /* Metric Cards */
+        .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.5rem 0}
+        .metric-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--card-radius);padding:1rem 1.1rem;transition:border-color .2s}
+        .metric-card:hover{border-color:var(--accent)}
+        .metric-label{font:500 .65rem/1 var(--font-body);text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:.4rem}
+        .metric-value{font:400 1.6rem/1.1 var(--font-display);color:var(--text)}
+        .metric-note{font:.7rem/1.3 var(--font-body);color:var(--text-muted);margin-top:.3rem}
+
+        /* Callout */
+        .callout{border-radius:var(--radius);padding:1rem 1.2rem;margin:1rem 0;border-left:3px solid;font:.82rem/1.5 var(--font-body)}
+        .callout-red{background:var(--red-bg);border-color:var(--red);color:var(--text-secondary)}
+        .callout-yellow{background:var(--yellow-bg);border-color:var(--yellow);color:var(--text-secondary)}
+        .callout-green{background:var(--green-bg);border-color:var(--green);color:var(--text-secondary)}
+        .callout strong{color:var(--text)}
+        .callout-title{font-weight:600;color:var(--text);display:block;margin-bottom:.3rem}
+
+        /* Tables */
+        .data-table{width:100%;border-collapse:collapse;margin:1rem 0;font:.8rem/1.4 var(--font-body)}
+        .data-table th{text-align:left;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-size:.7rem;padding:.6rem .8rem;border-bottom:2px solid var(--border);background:var(--bg-raised)}
+        .data-table td{padding:.55rem .8rem;border-bottom:1px solid var(--border-light);color:var(--text-secondary);vertical-align:top}
+        .data-table tr:hover td{background:var(--bg-hover)}
+        .data-table .page-ref{color:var(--text-muted);font-size:.7rem;white-space:nowrap}
+
+        /* Status badges */
+        .badge{display:inline-block;padding:.15rem .5rem;border-radius:999px;font:.65rem/1 var(--font-body);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+        .badge-red{background:var(--red-bg);color:var(--red)}
+        .badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
+        .badge-green{background:var(--green-bg);color:var(--green)}
+
+        /* Cards */
+        .card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--card-radius);padding:var(--card-pad);margin:.75rem 0;transition:border-color .2s}
+        .card:hover{border-color:var(--accent)}
+        .card-title{font:500 .9rem/1.3 var(--font-display);color:var(--text);margin-bottom:.5rem}
+
+        /* Checklist */
+        .check-list{list-style:none;margin:.5rem 0}
+        .check-list li{padding:.35rem 0 .35rem 1.5rem;position:relative;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)}
+        .check-list li::before{content:"";position:absolute;left:0;top:.55rem;width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border)}
+        .check-list li.ok::before{background:var(--green);border-color:var(--green)}
+        .check-list li.ok::after{content:"";position:absolute;left:3px;top:.65rem;width:8px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+        .check-list li.warn::before{background:var(--yellow);border-color:var(--yellow)}
+        .check-list li.fail::before{background:var(--red);border-color:var(--red)}
+
+        /* Collapsible */
+        details{margin:.5rem 0}
+        details summary{cursor:pointer;font:500 .85rem/1.4 var(--font-body);color:var(--text);padding:.5rem 0;list-style:none}
+        details summary::before{content:"+ ";color:var(--accent);font-weight:600}
+        details[open] summary::before{content:"- "}
+        details .detail-content{padding:.5rem 0 .5rem 1rem;border-left:2px solid var(--border-light)}
+
+        /* Severity indicator */
+        .severity{display:flex;align-items:center;gap:.4rem}
+        .severity-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+        .severity-dot.critical{background:var(--red)}
+        .severity-dot.important{background:var(--yellow)}
+        .severity-dot.minor{background:var(--green)}
+
+        /* Score bar */
+        .score-bar-wrap{margin:.5rem 0}
+        .score-bar-label{display:flex;justify-content:space-between;font:.75rem/1 var(--font-body);color:var(--text-muted);margin-bottom:.3rem}
+        .score-bar-track{height:6px;background:var(--bg-raised);border-radius:3px;overflow:hidden}
+        .score-bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
+
+        /* Footer */
+        footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border-light);font:.72rem/1.5 var(--font-body);color:var(--text-muted);text-align:center}
+
+        /* Kolloquium section special */
+        .tip-number{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font:600 .7rem/1 var(--font-body);margin-right:.5rem;flex-shrink:0}
+        .tip-item{display:flex;align-items:flex-start;margin:.6rem 0}
+        .tip-text{color:var(--text-secondary);font:.82rem/1.5 var(--font-body)}
+        .tip-text strong{color:var(--text)}
+
+        .question-card{background:var(--bg-raised);border-radius:var(--radius);padding:.7rem 1rem;margin:.4rem 0;font:.82rem/1.5 var(--font-body);color:var(--text-secondary);border-left:3px solid var(--accent)}
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Farbmodus wechseln" tabindex="0">
+        <span class="toggle-icon" id="theme-icon">&#9788;</span>
+        <div class="toggle-track"><div class="toggle-knob"></div></div>
+        <span class="toggle-label" id="theme-label">Light</span>
+    </div>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero fade-up" style="--i:0">
+            <div class="eyebrow">Vertrauliche Analyse</div>
+            <h1>Finale Pr&uuml;fung &mdash; Bachelorarbeit Lea Wiebe</h1>
+            <div class="subtitle">Momentaner Affekt und selektive Nachrichteninterpretation: Eine empirische Untersuchung auf Grundlage des Kommunikationsquadrats nach Schulz von Thun</div>
+            <div class="meta">IU Internationale Hochschule &middot; Kommunikationspsychologie (B.Sc.) &middot; Betreuerin: Prof. Dr. phil. Caroline Trautwein &middot; Abgabe: 28.03.2026</div>
+        </section>
+
+        <!-- Overview Metrics -->
+        <div class="metric-grid fade-up" style="--i:1">
+            <div class="metric-card">
+                <div class="metric-label">Seitenumfang</div>
+                <div class="metric-value">39</div>
+                <div class="metric-note">Vorgabe: 40 (&plusmn;10%)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Quellen</div>
+                <div class="metric-value">27</div>
+                <div class="metric-note">im Literaturverzeichnis</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Kritische Fehler</div>
+                <div class="metric-value" style="color:var(--red)">1</div>
+                <div class="metric-note">fehlende Quelle</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Gesamteindruck</div>
+                <div class="metric-value" style="color:var(--green)">Gut</div>
+                <div class="metric-note">wenige Korrekturen n&ouml;tig</div>
+            </div>
+        </div>
+
+        <!-- SECTION: Kritische Fehler -->
+        <h2 class="fade-up" style="--i:2">Kritische Befunde</h2>
+
+        <div class="callout callout-red fade-up" style="--i:3">
+            <span class="callout-title">Fehlende Quelle im Literaturverzeichnis</span>
+            <strong>Sedlmeier &amp; Renkewitz (2018)</strong> wird auf Seite 21 zitiert (Einschlussmethode, S. 247&ndash;248), fehlt aber komplett im Literaturverzeichnis. Das ist ein formaler Fehler, der bei der Begutachtung auffallen wird.<br><br>
+            <strong>Fix:</strong> Folgenden Eintrag erg&auml;nzen:<br>
+            <em>Sedlmeier, P. &amp; Renkewitz, F. (2018). Forschungsmethoden und Statistik f&uuml;r Psychologen und Sozialwissenschaftler (3. Aufl.). Pearson.</em>
+        </div>
+
+        <!-- SECTION: Formale Pr&uuml;fung -->
+        <h2 class="fade-up" style="--i:4">Formale Pr&uuml;fung gegen Thesis-Handbuch</h2>
+
+        <ul class="check-list fade-up" style="--i:5">
+            <li class="ok"><strong>Seitenumfang:</strong> 39 Seiten Haupttext (Vorgabe 36&ndash;44)</li>
+            <li class="ok"><strong>Seitennummerierung:</strong> R&ouml;misch im Vorspann (I&ndash;VIII), arabisch ab Einleitung (1&ndash;39)</li>
+            <li class="ok"><strong>Gliederung:</strong> Max. 3 Ebenen, jede Unterteilung mit mind. 2 Unterpunkten</li>
+            <li class="ok"><strong>Titelblatt:</strong> Hochschule, Studiengang, Titel, Name, Matrikelnr., Adresse, Betreuerin, Datum &mdash; alles vorhanden</li>
+            <li class="ok"><strong>Abstract:</strong> Deutsch (S. II) + Englisch (S. III) mit Schl&uuml;sselw&ouml;rtern, jeweils ca. 200 W&ouml;rter</li>
+            <li class="ok"><strong>Abbildungsverzeichnis:</strong> 3 Abbildungen (Abb. 1&ndash;3) korrekt gelistet</li>
+            <li class="ok"><strong>Tabellenverzeichnis:</strong> 10 Tabellen (Tab. 1&ndash;10) korrekt gelistet</li>
+            <li class="ok"><strong>Genderhinweis:</strong> Vorhanden (S. VIII)</li>
+            <li class="ok"><strong>Eidesstattliche Erkl&auml;rung:</strong> Vorhanden (S. 56), unterschrieben, Pfungstadt 28.03.2026</li>
+            <li class="ok"><strong>Anh&auml;nge:</strong> A (Fragebogen), B (G*Power), C (OSF-Link), D (Reliabilit&auml;t) &mdash; alle vorhanden</li>
+            <li class="ok"><strong>Seitenzahlen im Inhaltsverzeichnis:</strong> Stichprobenartig gepr&uuml;ft &mdash; alle korrekt</li>
+        </ul>
+
+        <!-- SECTION: Quellenabgleich -->
+        <h2 class="fade-up" style="--i:6">Quellenabgleich: Text vs. Literaturverzeichnis</h2>
+
+        <p>Alle 27 Eintr&auml;ge im Literaturverzeichnis wurden systematisch gegen die In-Text-Zitationen abgeglichen. Umgekehrt wurde jede im Text gefundene Quellenangabe im Verzeichnis verifiziert.</p>
+
+        <table class="data-table fade-up" style="--i:7">
+            <thead>
+                <tr><th>Pr&uuml;fpunkt</th><th>Ergebnis</th><th>Details</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Alle Lit.-Eintr&auml;ge im Text zitiert?</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>Alle 27 Eintr&auml;ge kommen im Text vor</td>
+                </tr>
+                <tr>
+                    <td>Alle In-Text-Zitate im Verzeichnis?</td>
+                    <td><span class="badge badge-red">Fehler</span></td>
+                    <td><strong>Sedlmeier &amp; Renkewitz (2018)</strong> fehlt im Verzeichnis (S. 21)</td>
+                </tr>
+                <tr>
+                    <td>Pers&ouml;nliche Mitteilung (Fust, 2026)</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>Korrekt nur im Text erw&auml;hnt, nicht im Verzeichnis (APA-konform)</td>
+                </tr>
+                <tr>
+                    <td>Jahreszahlen Text vs. Verzeichnis</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>Alle &uuml;berpr&uuml;ften Jahreszahlen stimmen &uuml;berein</td>
+                </tr>
+                <tr>
+                    <td>Alphabetische Sortierung</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>Korrekt alphabetisch nach Nachnamen sortiert</td>
+                </tr>
+                <tr>
+                    <td>DOIs / URLs vorhanden</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>Bei 22 von 27 Quellen DOI oder URL angegeben</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-yellow fade-up" style="--i:8">
+            <span class="callout-title">Hinweis: &bdquo;Manuskriptversion&ldquo;</span>
+            7 von 27 Quellen tragen den Zusatz <strong>[Manuskriptversion]</strong> &mdash; das sind ResearchGate/PMC-Preprints statt der finalen Verlagsversionen (Forgas 1995, Fredrickson 2001, Fredrickson &amp; Branigan 2005, Pham 2004, Schwarz 2012, Schwarz &amp; Clore 1983, Burgoon 1993). Das ist formal korrekt, wirkt aber auff&auml;llig viel. Wenn die publizierten Versionen &uuml;ber die Uni-Bibliothek zug&auml;nglich sind, w&auml;re die Verwendung der Verlagsversionen professioneller.
+        </div>
+
+        <!-- SECTION: Zitierweise -->
+        <h2 class="fade-up" style="--i:9">Zitierweise (IU-Zitierleitfaden / APA 7)</h2>
+
+        <table class="data-table fade-up" style="--i:10">
+            <thead>
+                <tr><th>Regel</th><th>Ergebnis</th><th>Anmerkung</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2 Autor:innen: &bdquo;und&ldquo; im Text, &bdquo;&amp;&ldquo; in Klammern</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>z.&thinsp;B. &bdquo;Breyer und Bluemke (2016)&ldquo; vs. &bdquo;(Bortz &amp; Schuster, 2010)&ldquo;</td>
+                </tr>
+                <tr>
+                    <td>3+ Autor:innen: &bdquo;et al.&ldquo;</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>z.&thinsp;B. &bdquo;Hohmeier et al. (2025)&ldquo;, &bdquo;Faul et al. (2007)&ldquo;</td>
+                </tr>
+                <tr>
+                    <td>Seitenangaben bei indirekten Zitaten</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>IU verlangt Seitenangaben auch bei indirekten Zitaten &mdash; &uuml;berwiegend vorhanden</td>
+                </tr>
+                <tr>
+                    <td>&bdquo;Schulz von Thun&ldquo; Namensbehandlung</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>&bdquo;von&ldquo; als Teil des Nachnamens, unter S einsortiert</td>
+                </tr>
+                <tr>
+                    <td>Literaturverzeichnis-Format</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>H&auml;ngender Einzug, kursive Titel, Verlagsangaben vorhanden</td>
+                </tr>
+                <tr>
+                    <td>Software-Zitation (JASP)</td>
+                    <td><span class="badge badge-green">OK</span></td>
+                    <td>&bdquo;JASP Team (2025). JASP (Version 0.95.4) [Computer software]&ldquo;</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION: Rechtschreibung -->
+        <h2 class="fade-up" style="--i:11">Rechtschreibung &amp; Sprache</h2>
+
+        <table class="data-table fade-up" style="--i:12">
+            <thead>
+                <tr><th>Fundstelle</th><th>Fehler</th><th>Korrektur</th><th>Typ</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="page-ref">S. 21</td>
+                    <td>&bdquo;stand<strong>art</strong>m&auml;&szlig;ig&ldquo;</td>
+                    <td>&bdquo;stand<strong>ard</strong>m&auml;&szlig;ig&ldquo;</td>
+                    <td><span class="badge badge-red">Rechtschr.</span></td>
+                </tr>
+                <tr>
+                    <td class="page-ref">Tab. 2 vs. Tab. 9/10</td>
+                    <td>Dezimalpräzision: M = 2.93 vs. M = 2.926</td>
+                    <td>Einheitlich 2 oder 3 Nachkommastellen w&auml;hlen</td>
+                    <td><span class="badge badge-yellow">Konsistenz</span></td>
+                </tr>
+                <tr>
+                    <td class="page-ref">Anhang D</td>
+                    <td>&bdquo;Cronbach <strong>a</strong>&ldquo; in &Uuml;berschriften</td>
+                    <td>&bdquo;Cronbachs <strong>&alpha;</strong>&ldquo; (griechisches Alpha)</td>
+                    <td><span class="badge badge-yellow">Konsistenz</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-green fade-up" style="--i:13">
+            <span class="callout-title">Insgesamt sehr sauber</span>
+            Die Arbeit weist nur sehr wenige Rechtschreib- und Formatierungsfehler auf. Der Text ist durchg&auml;ngig sprachlich korrekt und fl&uuml;ssig geschrieben. Keine Grammatikfehler gefunden. Gendern per Disclaimer-Modell ist konsequent umgesetzt.
+        </div>
+
+        <!-- SECTION: KI-Check -->
+        <h2 class="fade-up" style="--i:14">KI-Klang-Analyse</h2>
+
+        <p>Ziel: Einsch&auml;tzen, ob die Arbeit &bdquo;nach Lea klingt&ldquo; oder ob KI-typische Muster erkennbar sind, die einer Pr&uuml;ferin auffallen k&ouml;nnten.</p>
+
+        <div class="card fade-up" style="--i:15">
+            <div class="card-title">Was f&uuml;r Lea spricht</div>
+            <ul class="check-list">
+                <li class="ok">Keine typischen KI-Floskeln (&bdquo;Es ist wichtig zu beachten&ldquo;, &bdquo;Zusammenfassend l&auml;sst sich sagen&ldquo; etc.)</li>
+                <li class="ok">Keine &uuml;berm&auml;&szlig;igen Aufz&auml;hlungen oder Bullet-Point-Strukturen im Flie&szlig;text</li>
+                <li class="ok">Fachbegriffe werden korrekt und kontextuell passend verwendet</li>
+                <li class="ok">Die Argumentation hat einen erkennbaren roten Faden</li>
+                <li class="ok">Diskussion zeigt echte Reflexion &uuml;ber die eigenen Ergebnisse</li>
+                <li class="ok">Limitationen werden ehrlich und differenziert benannt</li>
+            </ul>
+        </div>
+
+        <div class="card fade-up" style="--i:16">
+            <div class="card-title">Potenzielle Risikosignale</div>
+            <ul style="list-style:none;margin:.5rem 0">
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)">
+                    <span style="color:var(--yellow);margin-right:.4rem">&#9650;</span>
+                    <strong>Gleichm&auml;&szlig;ig hohes Sprachniveau:</strong> Der Qualit&auml;tsunterschied zwischen Einleitung, Theorie, Methodik und Diskussion ist auff&auml;llig gering. Bei studentischen Arbeiten variiert das Sprachniveau normalerweise zwischen Kapiteln.
+                </li>
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)">
+                    <span style="color:var(--yellow);margin-right:.4rem">&#9650;</span>
+                    <strong>Sehr polierte &Uuml;berg&auml;nge:</strong> Die Transitions zwischen Abs&auml;tzen und Kapiteln sind durchgehend professionell &mdash; un&uuml;blich f&uuml;r ein erstes gr&ouml;&szlig;eres wissenschaftliches Schreibprojekt.
+                </li>
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)">
+                    <span style="color:var(--yellow);margin-right:.4rem">&#9650;</span>
+                    <strong>Diskussion &uuml;bertrifft Bachelor-Niveau:</strong> Die Einordnung des Umkehreffekts &uuml;ber Broaden-and-Build und die Abgrenzung von Varianzeinschr&auml;nkung ist bemerkenswert elaboriert.
+                </li>
+            </ul>
+        </div>
+
+        <div class="callout callout-yellow fade-up" style="--i:17">
+            <span class="callout-title">Gesamteinsch&auml;tzung</span>
+            Die Arbeit w&uuml;rde eine Turnitin-Plagiatsp&uuml;fung voraussichtlich bestehen, da der Text keine w&ouml;rtlichen &Uuml;bernahmen aus publizierten Quellen enth&auml;lt. Das gr&ouml;&szlig;te Risiko liegt nicht in der KI-Erkennung, sondern darin, dass <strong>Prof. Trautwein Leas normales Schreibniveau kennt</strong>. Wenn Lea in E-Mails oder beim 10%-Feedback deutlich einfacher schreibt als in der Arbeit, k&ouml;nnte das auffallen &mdash; besonders im Kolloquium, wenn sie &uuml;ber die Inhalte <em>spricht</em>.<br><br>
+            <strong>Empfehlung:</strong> Lea sollte jedes Kapitel so gut verstehen, dass sie die Kernargumente frei formulieren kann. Nicht auswendig lernen, sondern verstehen.
+        </div>
+
+        <!-- SECTION: Inhaltliche Anmerkungen -->
+        <h2 class="fade-up" style="--i:18">Inhaltliche Anmerkungen</h2>
+
+        <div class="card fade-up" style="--i:19">
+            <div class="card-title">St&auml;rken der Arbeit</div>
+            <p><strong>Theoretische Br&uuml;cke:</strong> Die Verbindung von Feelings-as-Information-Theorie und Affekt-Infusions-Modell mit dem Kommunikationsquadrat ist originell und gut hergeleitet. Das ist der zentrale wissenschaftliche Beitrag.</p>
+            <p><strong>Umkehreffekt H2:</strong> Der signifikante negative Zusammenhang zwischen PA und Sachebene (&beta; = &minus;.273, p = .009) ist das spannendste Ergebnis und wird in der Diskussion differenziert eingeordnet.</p>
+            <p><strong>Methodik:</strong> Saubere Voraussetzungspr&uuml;fung (Q-Q-Plots, Durbin-Watson, Cook's Distance), transparente Datenbereinigung, OSF-Link f&uuml;r Rohdaten.</p>
+        </div>
+
+        <div class="card fade-up" style="--i:20">
+            <div class="card-title">Kleinere inhaltliche Punkte</div>
+            <p><strong>PANAS PA-NA Korrelation (r = .727):</strong> Diese hohe Korrelation wird in der Diskussion (6.2.2) angesprochen, aber die Konsequenz f&uuml;r die Regressionsanalysen (Multikollinearit&auml;t) h&auml;tte st&auml;rker betont werden k&ouml;nnen.</p>
+            <p><strong>Aufmerksamkeitsitem:</strong> 42 von 155 Personen (27%) wurden ausgeschlossen &mdash; ein hoher Anteil, der in der Diskussion erw&auml;hnt wird. Gut, dass es thematisiert wird.</p>
+        </div>
+
+        <!-- SECTION: Kolloquium -->
+        <h2 class="fade-up" style="--i:21">Kolloquium &mdash; Empfehlungen</h2>
+
+        <p>Das Kolloquium findet via Microsoft Teams statt: ca. 15 Min. Pr&auml;sentation (PowerPoint), dann 15&ndash;30 Min. Frage-/Antwortrunde. Bewertungskriterien laut IU:</p>
+
+        <div class="metric-grid fade-up" style="--i:22" style="grid-template-columns: repeat(2, 1fr)">
+            <div class="metric-card">
+                <div class="metric-label">Pr&auml;sentation</div>
+                <div class="metric-value">15 min</div>
+                <div class="metric-note">Forschungsfrage &rarr; Schluss</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Diskussion</div>
+                <div class="metric-value">15&ndash;30 min</div>
+                <div class="metric-note">Fragen der Pr&uuml;fer:innen</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Inhalt z&auml;hlt</div>
+                <div class="metric-value">80%</div>
+                <div class="metric-note">der Thesis-Note</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Form z&auml;hlt</div>
+                <div class="metric-value">20%</div>
+                <div class="metric-note">der Thesis-Note</div>
+            </div>
+        </div>
+
+        <h3 class="fade-up" style="--i:23">Pr&auml;sentations-Struktur (15 Min.)</h3>
+
+        <div class="fade-up" style="--i:24">
+            <div class="tip-item"><span class="tip-number">1</span><span class="tip-text"><strong>Einstieg (2 Min.):</strong> Forschungsl&uuml;cke aufzeigen &mdash; Kommunikationsquadrat weit verbreitet, aber kaum empirisch untersucht. Affekt als Einflussfaktor auf Nachrichteninterpretation noch nie mit dem Modell verkn&uuml;pft.</span></div>
+            <div class="tip-item"><span class="tip-number">2</span><span class="tip-text"><strong>Theorie kompakt (3 Min.):</strong> Feelings-as-Information + Affekt-Infusions-Modell in je 2&ndash;3 S&auml;tzen. Dann die Br&uuml;cke zum Kommunikationsquadrat: Warum sollte Affekt die Gewichtung der vier Seiten beeinflussen?</span></div>
+            <div class="tip-item"><span class="tip-number">3</span><span class="tip-text"><strong>Hypothesen (1 Min.):</strong> H1 (NA &rarr; Beziehungsebene) und H2 (PA &rarr; Sachebene) klar und visuell darstellen.</span></div>
+            <div class="tip-item"><span class="tip-number">4</span><span class="tip-text"><strong>Methodik (3 Min.):</strong> Design (Querschnitt, online, N=91), PANAS, 12 Szenarien. Ablauf-Grafik (Abb. 3) &uuml;bernehmen.</span></div>
+            <div class="tip-item"><span class="tip-number">5</span><span class="tip-text"><strong>Ergebnisse (3 Min.):</strong> H1 nicht best&auml;tigt (&beta; = .026, n.s.). H2 <em>Umkehreffekt</em> &mdash; das ist der Star der Pr&auml;sentation! Korrelationsmatrix und ANOVA kurz zeigen.</span></div>
+            <div class="tip-item"><span class="tip-number">6</span><span class="tip-text"><strong>Diskussion &amp; Fazit (3 Min.):</strong> Warum H1 n.s.? (geringe Aktivierung). Warum H2 umgekehrt? (Broaden-and-Build). Was bedeutet das f&uuml;r die Praxis?</span></div>
+        </div>
+
+        <h3 class="fade-up" style="--i:25">Erwartbare Fragen &mdash; und wie Lea antworten sollte</h3>
+
+        <div class="fade-up" style="--i:26">
+            <div class="question-card">
+                <strong>&bdquo;Warum haben Sie kein experimentelles Design gew&auml;hlt?&ldquo;</strong><br>
+                Weil der Zusammenhang zwischen momentanem Affekt und Nachrichteninterpretation im Kommunikationsquadrat noch nie untersucht wurde &mdash; ein Querschnittsdesign ist als explorativer erster Schritt vertretbar. Experimentelle Stimmungsinduktion w&auml;re der logische n&auml;chste Schritt.
+            </div>
+            <div class="question-card">
+                <strong>&bdquo;Wie erkl&auml;ren Sie den Umkehreffekt bei H2?&ldquo;</strong><br>
+                Broaden-and-Build-Theorie (Fredrickson, 2001): Positive Emotionen erweitern den kognitiven Fokus. Statt sachliche Details zu vertiefen, wird der Blick breiter &mdash; auf soziale und relationale Aspekte. Das passt zur geringeren Gewichtung der Sachebene.
+            </div>
+            <div class="question-card">
+                <strong>&bdquo;Die PANAS-Subskalen korrelieren mit r = .727 &mdash; ist das nicht ein Problem?&ldquo;</strong><br>
+                Ja, die geringe Diskriminanzvalidit&auml;t in dieser Stichprobe ist eine Limitation. PA und NA sollten konzeptuell unabh&auml;ngig sein, aber die Teilnehmenden haben offenbar eher ein allgemeines Erregungsniveau berichtet. Das schr&auml;nkt die Trennbarkeit der Effekte ein.
+            </div>
+            <div class="question-card">
+                <strong>&bdquo;Warum wurden 42 Personen wegen des Aufmerksamkeitsitems ausgeschlossen?&ldquo;</strong><br>
+                Das sind 27% der Ausgangsstichprobe &mdash; ein hoher Anteil, der darauf hindeutet, dass die Befragung kognitiv anspruchsvoll war. Das Aufmerksamkeitsitem war als Qualit&auml;tskontrolle notwendig, um seri&ouml;se von unaufmerksamen Antworten zu trennen.
+            </div>
+            <div class="question-card">
+                <strong>&bdquo;Wie kommen Sie auf die Verbindung zwischen Affekt und Beziehungsebene? Das steht so nicht bei Schulz von Thun.&ldquo;</strong><br>
+                Richtig &mdash; das ist eine eigenst&auml;ndige theoretische Ableitung. Schulz von Thun beschreibt die Selektivit&auml;t der Wahrnehmung, sagt aber nichts &uuml;ber affektive Einflussfaktoren. Die Br&uuml;cke kommt &uuml;ber die Feelings-as-Information-Theorie: Negativer Affekt erh&ouml;ht die Sensibilit&auml;t f&uuml;r interpersonelle Signale, was sich auf die Beziehungsebene &uuml;bertragen l&auml;sst.
+            </div>
+            <div class="question-card">
+                <strong>&bdquo;Was w&uuml;rden Sie beim n&auml;chsten Mal anders machen?&ldquo;</strong><br>
+                Experimentelles Design mit Stimmungsinduktion (z.&thinsp;B. Filmclips wie bei Matovic &amp; Forgas, 2018), multimodale Szenarien (Audio/Video statt nur Text), und eine zweimalige PANAS-Messung (vor und nach den Szenarien), um Stimmungsver&auml;nderungen zu erfassen.
+            </div>
+        </div>
+
+        <h3 class="fade-up" style="--i:27">Generelle Tipps f&uuml;rs Kolloquium</h3>
+
+        <div class="card fade-up" style="--i:28">
+            <ul style="list-style:none;margin:0">
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)"><span style="color:var(--accent);margin-right:.4rem">&#10148;</span> <strong>Eigene Worte nutzen:</strong> Nicht die Arbeit vorlesen. Frei formulieren zeigt Verst&auml;ndnis.</li>
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)"><span style="color:var(--accent);margin-right:.4rem">&#10148;</span> <strong>Limitationen offensiv ansprechen:</strong> Wer seine Schw&auml;chen kennt, wirkt kompetent.</li>
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)"><span style="color:var(--accent);margin-right:.4rem">&#10148;</span> <strong>Den Umkehreffekt als St&auml;rke framen:</strong> Nicht-best&auml;tigte Hypothesen mit &uuml;berraschendem Befund sind wissenschaftlich wertvoller als triviale Best&auml;tigungen.</li>
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)"><span style="color:var(--accent);margin-right:.4rem">&#10148;</span> <strong>Zahlen parat haben:</strong> N=91, &beta;=&minus;.273, p=.009, R&sup2;=.074, PANAS-Korrelation r=.727, ANOVA &eta;&sup2;p=.649</li>
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)"><span style="color:var(--accent);margin-right:.4rem">&#10148;</span> <strong>Technik testen:</strong> Teams-Verbindung, Bildschirmfreigabe und PowerPoint vorher pr&uuml;fen.</li>
+                <li style="padding:.3rem 0;color:var(--text-secondary);font:.82rem/1.5 var(--font-body)"><span style="color:var(--accent);margin-right:.4rem">&#10148;</span> <strong>&bdquo;Das wei&szlig; ich nicht&ldquo; ist erlaubt:</strong> Besser als eine falsche Antwort. Aber direkt erg&auml;nzen: &bdquo;Was ich dazu sagen kann, ist...&ldquo;</li>
+            </ul>
+        </div>
+
+        <!-- SECTION: Zusammenfassung -->
+        <h2 class="fade-up" style="--i:29">Zusammenfassung: To-Do-Liste</h2>
+
+        <table class="data-table fade-up" style="--i:30">
+            <thead>
+                <tr><th>Priorit&auml;t</th><th>Aufgabe</th><th>Aufwand</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-red">Kritisch</span></td>
+                    <td>Sedlmeier &amp; Renkewitz (2018) ins Literaturverzeichnis aufnehmen</td>
+                    <td>2 Min.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-red">Kritisch</span></td>
+                    <td>&bdquo;standartm&auml;&szlig;ig&ldquo; &rarr; &bdquo;standardm&auml;&szlig;ig&ldquo; korrigieren (S. 21)</td>
+                    <td>1 Min.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-yellow">Empfohlen</span></td>
+                    <td>Dezimalpräzision in Tabellen vereinheitlichen (2 oder 3 Stellen)</td>
+                    <td>10 Min.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-yellow">Empfohlen</span></td>
+                    <td>&bdquo;Cronbach a&ldquo; in Anhang-D-&Uuml;berschriften &rarr; &bdquo;Cronbachs &alpha;&ldquo;</td>
+                    <td>2 Min.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-yellow">Optional</span></td>
+                    <td>[Manuskriptversion]-Eintr&auml;ge durch Verlagsversionen ersetzen (wenn zug&auml;nglich)</td>
+                    <td>30 Min.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-green fade-up" style="--i:31">
+            <span class="callout-title">Fazit</span>
+            Die Arbeit ist insgesamt <strong>solide und abgabebereit</strong>. Der einzige wirklich kritische Fehler (fehlende Quelle Sedlmeier &amp; Renkewitz) l&auml;sst sich in 2 Minuten beheben. Der Rechtschreibfehler &bdquo;standartm&auml;&szlig;ig&ldquo; ebenso. Inhaltlich ist die Arbeit gut strukturiert, die Diskussion zeigt echte Reflexion, und der Umkehreffekt bei H2 verleiht der Arbeit wissenschaftlichen Mehrwert. Die formalen Anforderungen der IU sind erf&uuml;llt.
+        </div>
+
+        <footer class="fade-up" style="--i:32">
+            Analyse erstellt am 23. M&auml;rz 2026 &middot; Vertraulich &middot; Lea Wiebe &middot; IU Internationale Hochschule
+        </footer>
+    </main>
+
+    <script>
+        function toggleTheme(){var a=document.documentElement.getAttribute('data-theme')==='dark';setTheme(a?'light':'dark')}
+        function setTheme(t){if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}else{document.documentElement.removeAttribute('data-theme')}document.getElementById('theme-icon').textContent=t==='dark'?'\u263E':'\u2606';document.getElementById('theme-label').textContent=t==='dark'?'Dark':'Light';try{localStorage.setItem('report-theme',t)}catch(e){}}
+        (function(){var s=null;try{s=localStorage.getItem('report-theme')}catch(e){}if(s){setTheme(s)}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){setTheme('dark')}})();
+    </script>
+</body>
+</html>
